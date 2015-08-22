@@ -30,9 +30,23 @@ class JennystartXBlock(XBlock):
         The primary view of the JennystartXBlock, shown to students
         when viewing courses.
         """
-
-        student_id=self.runtime.anonymous_student_id      
-        context_dict={"file":student_id}
+        student_id=self.runtime.anonymous_student_id
+        base_path="/edx/var/edxapp/staticfiles/ucore/"
+        real_user = self.runtime.get_real_user(student_id)
+	    username = real_user.username
+        
+        conn = pymongo.Connection('localhost', 27017)
+        db = conn.test
+        codeview = db.codeview
+        result = user.find_one({"username":username})
+        conn.disconnect()
+        
+        if result:
+            relative_path = result["view_file"]
+        else:
+            relative_path = "please enter file path"
+            
+        context_dict={"file":relative_path}
 
         fragment = Fragment()
         fragment.add_content(Util.render_template("static/html/jennystart.html",context_dict) )
