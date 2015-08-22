@@ -52,7 +52,7 @@ class JennystartXBlock(XBlock):
     # TO-DO: change this handler to perform your own actions.  You may need more
     # than one handler, or you may not need any handlers at all.
     @XBlock.json_handler
-    def increment_count(self, data, suffix=''):
+    def open_file(self, data, suffix=''):
         """
         An  handler, which read the data.
         """
@@ -79,7 +79,7 @@ class JennystartXBlock(XBlock):
         output=open(self.file_path,"wb")
         output.write(self.codeData)
         output.close()
-        return True
+        return {"result": True}
 
     @XBlock.json_handler
     def commit_to_git(self, data, suffix=''):
@@ -98,20 +98,6 @@ class JennystartXBlock(XBlock):
         return {"messege":messege}
 
 
-    # TO-DO: change this to create the scenarios you'd like to see in the
-    # workbench while developing your XBlock.
-    @staticmethod
-    def workbench_scenarios():
-        """A canned scenario for display in the workbench."""
-        return [
-            ("JennystartXBlock",
-             """<vertical_demo>
-               <jennystart/>
-               <jennystart/>
-               <jennystart/>
-               </vertical_demo>
-            """),
-            ]
 
 
 
