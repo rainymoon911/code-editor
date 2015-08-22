@@ -4,7 +4,7 @@ function JennystartXBlock(runtime, element) {
 
     
 
-    var handlerUrl = runtime.handlerUrl(element, 'increment_count');
+    var handlerUrl = runtime.handlerUrl(element, 'open_file');
     var saveHandlerUrl = runtime.handlerUrl(element, 'save_file');
     var commitHandlerUrl = runtime.handlerUrl(element, 'commit_to_git');
     var editor;
